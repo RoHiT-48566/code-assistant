@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap");
 * {
-  margin: 0%;
-  padding: 0%;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
+
 html,
 body,
 #root {
@@ -15,48 +17,90 @@ main {
   width: 100%;
   padding: 1.5rem;
   display: flex;
+  flex-direction: column; /* Stacked vertically on small screens */
   gap: 1rem;
+  font-family: Inconsolata, monospace;
 }
 
 main .left,
 main .right {
-  height: 100%;
-  flex-basis: 50%;
+  flex: 1;
   border-radius: 0.7rem;
-  border: 1px solid black;
+  font-size: 1rem;
+  border: 1px solid whitesmoke;
+  position: relative;
+  overflow: hidden;
 }
 
 main .left {
-  background-color: whitesmoke;
-  position: relative;
-  overflow: auto;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
 }
 
-.left .code,
-.code pre,
-.code pre code {
-  height: 100%;
-  width: 100%;
-  margin: 0;
+.left .code {
+  flex-grow: 1;
+  overflow: auto;
+  padding: 1rem;
   border-radius: 0.7rem;
-  background-color: #474242;
+  background-color: black;
+}
+
+.left .code textarea {
+  font-size: 1rem;
+  outline: none !important;
+  border: none;
+  resize: vertical;
+}
+
+.left .code textarea:focus,
+.left .code textarea:hover {
+  outline: none;
+  border: none;
 }
 
 main .left .review {
   position: absolute;
-  bottom: 1rem;
-  right: 1rem;
+  bottom: 0;
+  right: 0;
   background-color: darkcyan;
   padding: 0.5rem 2rem;
   font-weight: 500;
   cursor: pointer;
   user-select: none;
-  border-radius: 0.7rem;
+  border-radius: 0.7rem 0 0 0;
   color: white;
+  z-index: 10;
+}
+
+main .left .review.sticky {
+  position: sticky;
+  top: 0;
+  right: 0;
+  bottom: unset;
 }
 
 main .right {
-  background-color: grey;
+  background-color: rgba(245, 245, 245, 0.786);
+  color: black;
   padding: 1rem 2rem;
   overflow: auto;
+  max-height: 100%;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+@media (min-width: 1000px) {
+  main {
+    flex-direction: row;
+  }
+  main .left,
+  main .right {
+    flex-basis: 50%;
+  }
 }

@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;600&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -10,40 +11,52 @@ body,
 #root {
   height: 100%;
   width: 100%;
+  font-family: "Inter", sans-serif;
+  background-color: #0f1117;
+  color: #ffffff;
+}
+
+.header {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #00ffc3;
+  padding: 1rem 0;
+  letter-spacing: 2px;
+  font-family: "Fira Code", monospace;
+  text-shadow: 0 0 10px rgba(0, 255, 195, 0.5);
 }
 
 main {
-  height: 100%;
-  width: 100%;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column; /* Stacked vertically on small screens */
-  gap: 1rem;
-  font-family: Inconsolata, monospace;
-}
-
-main .left,
-main .right {
-  flex: 1;
-  border-radius: 0.7rem;
-  font-size: 1rem;
-  border: 1px solid whitesmoke;
-  position: relative;
-  overflow: hidden;
-}
-
-main .left {
-  background-color: black;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  padding: 1.5rem;
+  gap: 1.5rem;
+}
+
+.left,
+.right {
+  flex: 1;
+  border-radius: 1rem;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.left {
+  background-color: #111827;
+  border: 1px solid #2e3440;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 15px rgba(0, 255, 195, 0.05);
 }
 
 .left .code {
-  flex-grow: 1;
-  overflow: auto;
+  background-color: #0d1117;
+  border-radius: 0.8rem;
   padding: 1rem;
-  border-radius: 0.7rem;
-  background-color: black;
+  overflow: auto;
+  height: 400px;
 }
 
 .left .code textarea {
@@ -51,40 +64,47 @@ main .left {
   outline: none !important;
   border: none;
   resize: vertical;
+  background-color: transparent;
+  color: #ffffff;
+  font-family: "Fira Code", monospace;
 }
 
-.left .code textarea:focus,
-.left .code textarea:hover {
-  outline: none;
+.review {
+  background: linear-gradient(to right, #00ffc3, #00b894);
   border: none;
-}
-
-main .left .review {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background-color: darkcyan;
-  padding: 0.5rem 2rem;
-  font-weight: 500;
-  cursor: pointer;
-  user-select: none;
-  border-radius: 0.7rem 0 0 0;
-  color: white;
-  z-index: 10;
-}
-
-main .left .review.sticky {
-  position: sticky;
-  top: 0;
-  right: 0;
-  bottom: unset;
-}
-
-main .right {
-  background-color: rgba(245, 245, 245, 0.786);
+  padding: 0.8rem 2rem;
+  font-weight: 600;
+  font-size: 1rem;
   color: black;
-  padding: 1rem 2rem;
-  overflow: auto;
+  margin-top: 1rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 14px rgba(0, 255, 195, 0.4);
+  text-align: center;
+}
+
+.review:hover {
+  background: linear-gradient(to right, #00ffcc, #00e0a4);
+  transform: scale(1.02);
+}
+
+.review.sticky {
+  position: sticky;
+  top: 1rem;
+  z-index: 100;
+}
+
+.right {
+  background-color: #f8f9fa;
+  color: #2c3e50;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  overflow-y: auto;
+  font-size: 1rem;
+  line-height: 1.6;
   max-height: 100%;
 }
 
@@ -92,15 +112,83 @@ main .right {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  height: 100%;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #00b894;
+}
+
+.right h1,
+.right h2,
+.right h3 {
+  color: #00b894;
+}
+
+.right code {
+  background: #eee;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: "Fira Code", monospace;
+  /* color: #c7254e; */
+  color: black;
+}
+
+.right pre {
+  background-color: #2d2d2d !important;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  color: #f8f8f2;
+  margin-top: 1rem;
+  font-family: "Fira Code", monospace;
+}
+
+@media (min-width: 1000px) {
+  main {
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  .left,
+  .right {
+    flex-basis: 50%;
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+main {
+  height: calc(100% - 80px); /* Leaves room for header */
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
 }
 
 @media (min-width: 1000px) {
   main {
     flex-direction: row;
   }
-  main .left,
-  main .right {
+
+  .left,
+  .right {
+    height: 100%;
     flex-basis: 50%;
+  }
+
+  .left .code {
+    flex: 1;
+    height: 100%;
+    overflow: auto;
+  }
+
+  .right {
+    overflow-y: auto;
   }
 }

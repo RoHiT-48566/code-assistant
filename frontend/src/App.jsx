@@ -11,7 +11,9 @@ import axios from "axios";
 function App() {
   const [code, setCode] = useState(`//Enter your code here...`);
   const [isLoading, setIsLoading] = useState(false);
-  const [review, setReview] = useState(`Review will be displayed here...`);
+  const [review, setReview] = useState(
+    `Please provide the code you want me to review. I need the code to be able to analyze it and give you feedback.`
+  );
   const reviewButtonRef = useRef(null);
   const [isSticky, setIsSticky] = useState(false);
 
@@ -39,7 +41,6 @@ function App() {
       const parent = reviewButtonRef.current.parentElement;
       const buttonRect = reviewButtonRef.current.getBoundingClientRect();
       const parentRect = parent.getBoundingClientRect();
-
       setIsSticky(buttonRect.top <= parentRect.top);
     };
 
@@ -57,6 +58,7 @@ function App() {
 
   return (
     <>
+      <header className="header">CodeCritic</header>
       <main>
         <div className="left">
           <div className="code">
@@ -66,20 +68,14 @@ function App() {
               highlight={(code) =>
                 prism.highlight(code, prism.languages.javascript, "javascript")
               }
-              padding={10}
+              padding={12}
               style={{
-                fontFamily: '"Fira code", "Fira Mono", monospace',
-                fontSize: "clamp(14px, 1.2vw, 18px)", // Responsive font size
-                borderRadius: "5px",
-                height: "100%",
-                width: "100%",
-                overflow: "auto",
-                whiteSpace: "pre",
-                lineHeightStep: "1.5",
-                display: "block",
-                color: "white",
+                fontFamily: '"Fira Code", monospace',
+                fontSize: "1rem",
+                color: "#fff",
                 backgroundColor: "black",
-                resize: "vertical",
+                minHeight: "100%",
+                width: "100%",
               }}
             />
           </div>

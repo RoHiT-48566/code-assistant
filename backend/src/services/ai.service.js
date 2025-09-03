@@ -77,7 +77,8 @@ const model = genAI.getGenerativeModel({
 `,
 });
 
-const prompt = "Explain how AI works";
+const prompt =
+  "Review the following code and provide detailed feedback, suggestions for improvement, and any potential issues. Be specific and provide examples where applicable.";
 
 async function generateContent(prompt) {
   const result = await model.generateContent(prompt);
